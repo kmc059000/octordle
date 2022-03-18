@@ -1295,7 +1295,7 @@ function restart() {
     if (daily_mode) {
         var date = (new Date());
         var startDate = (new Date('01/24/2022'));
-        seed = Math.floor((date.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+        seed = Math.round((date.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
 
         printclear(acquire("game_title"), "daily octordle #" + seed.toString(10).padStart(4, "0"));
         window.last_daily = seed;
