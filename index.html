@@ -1376,19 +1376,32 @@ function restart() {
     rnd.genrand_int31();
     rnd.genrand_int31();
     rnd.genrand_int31();
-    do {
+    if (seed === 88 && daily_mode) {
         answer = [
-            answers[rnd.genrand_int31() % answers.length],
-            answers[rnd.genrand_int31() % answers.length],
-            answers[rnd.genrand_int31() % answers.length],
-            answers[rnd.genrand_int31() % answers.length],
-            
-            answers[rnd.genrand_int31() % answers.length],
-            answers[rnd.genrand_int31() % answers.length],
-            answers[rnd.genrand_int31() % answers.length],
-            answers[rnd.genrand_int31() % answers.length],
+            "eight",
+            "eight",
+            "eight",
+            "eight",
+            "eight",
+            "eight",
+            "eight",
+            "eight",
         ];
-    } while (new Set(answer).size != TOTAL_BOXES);
+    } else {
+        do {
+            answer = [
+                answers[rnd.genrand_int31() % answers.length],
+                answers[rnd.genrand_int31() % answers.length],
+                answers[rnd.genrand_int31() % answers.length],
+                answers[rnd.genrand_int31() % answers.length],
+
+                answers[rnd.genrand_int31() % answers.length],
+                answers[rnd.genrand_int31() % answers.length],
+                answers[rnd.genrand_int31() % answers.length],
+                answers[rnd.genrand_int31() % answers.length],
+            ];
+        } while (new Set(answer).size != TOTAL_BOXES);
+    }
 
     line = 0;
     column = 0;
