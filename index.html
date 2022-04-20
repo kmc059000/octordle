@@ -1404,8 +1404,6 @@ function restart() {
          */
         seed = dateDiffInDays(new Date('01/24/2022'), new Date());
 
-        printclear(acquire("game_title"), "daily octordle #" + seed.toString(10).padStart(4, "0"));
-
         printclear(acquire("game_title"), "daily octordle #");
 
         var str = seed.toString(10).padStart(4, "0");
