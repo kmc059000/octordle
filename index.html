@@ -1878,7 +1878,7 @@ window.onresize = function() {
     let body = acquire("body");
 
     let mode = localStorage.getItem("widescreen");
-    let wideScreenAllowed = window.innerWidth > 1512;
+    let wideScreenAllowed = window.innerWidth >= 1512;
 
     let showWidescreenQuestion = !mode && wideScreenAllowed;
     let showWidescreen = mode === "yes" && wideScreenAllowed;
