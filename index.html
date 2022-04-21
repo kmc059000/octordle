@@ -1046,7 +1046,7 @@ function initDaily() {
     if (window.gtag) {
         gtag("event", "start", {
             mode: "daily",
-            daily_seed: daily_mode ? seed : undefined
+            daily_seed: daily_mode ? window.seed : undefined
         });
     }
 }
@@ -1102,6 +1102,8 @@ function initTutorial() {
 }
 
 function initTitle() {
+    let seed = window.seed;
+
     mode_leaving = daily_mode ? "daily" : "free";
     seed_leaving = daily_mode ? seed : undefined;
     daily_mode = false;
@@ -1152,6 +1154,8 @@ function pressKey(e) {
 }
 
 function pk(key, keyCode) {
+    let seed = window.seed;
+
     if (!daily_mode && !free_mode) return;
     if (line >= TOTAL_LINES) return;
     if (keyCode == 8) {
@@ -1402,7 +1406,8 @@ function restart() {
             test("Fri Mar 25 2022 01:42:38 GMT-0500 (Central Daylight Time)", 60)
             test("Fri Mar 25 2022 23:42:38 GMT-0500 (Central Daylight Time)", 60)
          */
-        seed = dateDiffInDays(new Date('01/24/2022'), new Date());
+        window.seed = dateDiffInDays(new Date('01/24/2022'), new Date());
+        let seed = window.seed;
 
         printclear(acquire("game_title"), "daily octordle #");
 
@@ -1456,6 +1461,7 @@ function restart() {
     rnd.genrand_int31();
     rnd.genrand_int31();
     rnd.genrand_int31();
+    let seed = window.seed;
     if (seed === 88 && daily_mode) {
         answer = [
             "eight",
