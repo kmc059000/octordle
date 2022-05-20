@@ -281,6 +281,9 @@ table {
             <div id="giveordle" style="padding:12px;cursor:pointer;font-size: .75rem;color:white;">
                 #giveordle - <span id="giveordle-text"></span>
             </div>
+            <div class="box" style="width: 60%; border:double;cursor:pointer; margin-bottom: 25px; display:none;" id="tryv2">
+                <a href="https://octordle.com/v2/?ref=v1">Try the new version!</a>
+            </div>
             <div class="box bg1" style="width: 60%; border:double;cursor:pointer;" id="daily">
                 <table style="width:100%;">
                     <tr>
@@ -1964,6 +1967,23 @@ onStateChange();
 
     if (days > 57) {
        clear(acquire('giveordle'))
+    }
+})();
+
+(function v2() {
+    var v2Setting = localStorage.getItem("v2allow");
+    if(!v2Setting) {
+        v2Setting = Math.random() * 1000;
+        localStorage.setItem("v2allow", v2Setting)
+    } else {
+        v2Setting = parseFloat(v2Setting);
+    }
+
+    var daysSinceRelease = dateDiffInDays(new Date('2022-05-20'), new Date());
+    var threshold = Math.pow(10, daysSinceRelease);
+
+    if(v2Setting < threshold) {
+        acquire('tryv2').style.display = "block";
     }
 })();
 
