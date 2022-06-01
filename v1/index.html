@@ -10,14 +10,16 @@
 <!-- FB Meta Tags -->
 <meta property="og:url" content="https://octordle.com">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Octordle">
+<meta property="og:title" content="octordle">
 <meta property="og:description" content="Put your skills to the test and solve eight Wordles at once! You have 13 guesses to solve all eight words. A new Octordle available each day to solve.">
-<meta property="og:image" content="https://octordle.com/screenshot.png">
-<meta property="og:image:width" content="802">
-<meta property="og:image:height" content="531">
+<meta property="og:image" content="https://octordle.com/screenshot.png?1">
+<meta property="og:image:width" content="600">
+<meta property="og:image:height" content="300">
 
 <!-- Twitter Meta Tags -->
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="octordle">
+<meta property="twitter:image" content="https://octordle.com/screenshot.png?1">
 <meta property="twitter:domain" content="octordle.com">
 
 <meta name="theme-color" content="#181a1b" />
@@ -236,18 +238,10 @@ table {
 <div id="body" style="max-width:550px;margin:auto;height:100%;display:flex">
     <div id="title" width="100%" style="margin:auto;flex:1;">
         <center>
-            <div class="button">&nbsp;</div>
             <div style="width: 67%;">
                 <table style="width:100%;">
                     <tr>
-                        <td class="box button bg-quad bg11" style="width:12.8%">O</td>
-                        <td class="box button bg-quad bg55" style="width:12.8%">C</td>
-                        <td class="box button bg-quad bg55" style="width:12.8%">T</td>
-                        <td class="box button bg-quad bg33" style="width:12.8%">O</td>
-                        <td class="box button bg-quad bg22" style="width:12.8%">R</td>
-                        <td class="box button bg-quad bg66" style="width:12.8%">D</td>
-                        <td class="box button bg-quad bg55" style="width:12.8%">L</td>
-                        <td class="box button bg-quad bg44" style="width:12.8%">E</td>
+                        <td style="text-align: center;"><img src="./octordle_dark.svg" alt="octordle" height="70" /></td>
                     </tr>
                 </table>
             </div>
@@ -1511,7 +1505,7 @@ function restart() {
     if ((daily_mode || free_mode) && !window.no_localstorage) {
         try {
             ls_guesses = window.localStorage.getItem(daily_mode ? "daily_guesses" : "free_guesses")
-            ls_guesses = ls_guesses ? ls_guesses.split(",") : [];
+            ls_guesses = ls_guesses ? ls_guesses.split(",").map(x => x.toLowerCase()) : [];
             if (ls_guesses.length > 0) {
                 restoring_game = true
                 for (var i = 0; i < ls_guesses.length; i++) {
