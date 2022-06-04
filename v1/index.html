@@ -275,6 +275,24 @@ table {
             <div id="giveordle" style="padding:12px;cursor:pointer;font-size: .75rem;color:white;">
                 #giveordle - <span id="giveordle-text"></span>
             </div>
+            <div class="box" style="width: 100%; font-size: 1rem; border:double;cursor:pointer; margin-bottom: 25px;" id="quordle-gate">
+                <p>
+                    The original Daily Game #131 used the same first 4 words from Quordle. Both apps are both based on the same original code, and there was a seemingly unlikely 
+                    randomization fluke. A new #131 is now available, and the randomization has been changed slightly in the hopes this never happens again.
+                </p>
+                <p>
+                    There is no consipiracy between quordle and octordle lol, but I love the theories that were posted and the people who acted like it ruined their Saturday. <!-- #getalife -->
+                    It was entirely unintentional.
+                </p>
+                <p>
+                    Since the randomization has been changed, this requires EVERYBODY to refresh their page to get the new logic. People weirdly leave tabs open for weeks
+                    or months on end, and then complain when their version differs from others' and don't try refreshing. So going forward the daily words might vary from your friends.
+                    Tell them to refresh their page and maybe shame them a little for it! ;)
+                </p>
+                <p>
+                    ♥ - octordle
+                </p>
+            </div>
             <div class="box" style="width: 60%; border:double;cursor:pointer; margin-bottom: 25px; display:none;" id="tryv2">
                 <a href="https://octordle.com/v2/?ref=v1">Try the new version!</a>
             </div>
@@ -1347,6 +1365,9 @@ function setTimeToNext() {
 setInterval(setTimeToNext, 1000);
 setTimeToNext();
 
+//reload occasionally cuz ppl just leave the page open and never refresh
+setTimeout(() => window.location.reload(true), 2 * 60 * 60 * 1000);
+
 
 //https://stackoverflow.com/a/15289883/453449
 function dateDiffInDays(a, b) {
@@ -1459,6 +1480,12 @@ function restart() {
     rnd.genrand_int31();
     rnd.genrand_int31();
     let seed = window.seed;
+    if(seed >= 131) {
+        let cntr = ((seed - 131) % 5) + 1;
+        while(cntr--) {
+            rnd.genrand_int31();
+        }
+    }
     if (seed === 88 && daily_mode) {
         answer = [
             "eight",
@@ -1505,7 +1532,13 @@ function restart() {
     if ((daily_mode || free_mode) && !window.no_localstorage) {
         try {
             ls_guesses = window.localStorage.getItem(daily_mode ? "daily_guesses" : "free_guesses")
+            if(daily_mode && seed == 131 && !window.localStorage.getItem("reset131")) {
+                ls_guesses = null;
+                window.localStorage.removeItem("daily_guesses");
+                window.localStorage.setItem("reset131", "1");
+            }
             ls_guesses = ls_guesses ? ls_guesses.split(",").map(x => x.toLowerCase()) : [];
+
             if (ls_guesses.length > 0) {
                 restoring_game = true
                 for (var i = 0; i < ls_guesses.length; i++) {
