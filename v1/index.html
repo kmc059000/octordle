@@ -1532,7 +1532,7 @@ function restart() {
     if ((daily_mode || free_mode) && !window.no_localstorage) {
         try {
             ls_guesses = window.localStorage.getItem(daily_mode ? "daily_guesses" : "free_guesses")
-            if(daily_mode && seed == 131 && !window.localStorage.getItem("reset131")) {
+            if(daily_mode && seed >= 131 && !window.localStorage.getItem("reset131")) {
                 ls_guesses = null;
                 window.localStorage.removeItem("daily_guesses");
                 window.localStorage.setItem("reset131", "1");
