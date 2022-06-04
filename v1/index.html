@@ -1453,7 +1453,7 @@ function restart() {
                 window.no_localstorage = true;
             }
         }
-        rnd = new MersenneTwister(seed);
+        rnd = new MersenneTwister(seed >= 131 ? seed + 8888 : seed);
     } else if (free_mode) {
         if (!window.no_localstorage) {
             try {
@@ -1483,12 +1483,6 @@ function restart() {
     rnd.genrand_int31();
     rnd.genrand_int31();
     let seed = window.seed;
-    if(seed >= 131) {
-        let cntr = ((seed - 131) % 5) + 1;
-        while(cntr--) {
-            rnd.genrand_int31();
-        }
-    }
     if (seed === 88 && daily_mode) {
         answer = [
             "eight",
@@ -1535,10 +1529,10 @@ function restart() {
     if ((daily_mode || free_mode) && !window.no_localstorage) {
         try {
             ls_guesses = window.localStorage.getItem(daily_mode ? "daily_guesses" : "free_guesses")
-            if(ls_guesses && daily_mode && seed >= 131 && !window.localStorage.getItem("reset131")) {
+            if(ls_guesses && daily_mode && seed >= 131 && !window.localStorage.getItem("reset131_2")) {
                 ls_guesses = null;
                 window.localStorage.removeItem("daily_guesses");
-                window.localStorage.setItem("reset131", "1");
+                window.localStorage.setItem("reset131_2", "1");
             }
             ls_guesses = ls_guesses ? ls_guesses.split(",").map(x => x.toLowerCase()) : [];
 
@@ -1708,14 +1702,14 @@ function fullscreenHandler() {
 }
 
 acquire("closequordlegate").onclick = function() {
-    localStorage.setItem('closequordlegate', '1');
+    localStorage.setItem('closequordlegate2', '1');
     if (window.gtag) {
-        gtag("event", "quordlegate-close");
+        gtag("event", "quordlegate-close2");
     }
     acquire('quordle-gate').style.display = "none"
 }
 
-if(!localStorage.getItem("closequordlegate")) {
+if(!localStorage.getItem("closequordlegate2")) {
     acquire('quordle-gate').style.display = "block";
 }
 
