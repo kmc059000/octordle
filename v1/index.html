@@ -1533,6 +1533,7 @@ function restart() {
                 ls_guesses = null;
                 window.localStorage.removeItem("daily_guesses");
                 window.localStorage.setItem("reset131_2", "1");
+                gtag("event", "reset131");
             }
             ls_guesses = ls_guesses ? ls_guesses.split(",").map(x => x.toLowerCase()) : [];
 
