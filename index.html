@@ -275,7 +275,7 @@ table {
             <div id="giveordle" style="padding:12px;cursor:pointer;font-size: .75rem;color:white;">
                 #giveordle - <span id="giveordle-text"></span>
             </div>
-            <div class="box" style="width: 100%; font-size: 1rem; border:double;cursor:pointer; margin-bottom: 25px;" id="quordle-gate">
+            <div class="box" style="width: 100%; font-size: 1rem; border:double;cursor:pointer; margin-bottom: 25px;display:none;" id="quordle-gate">
                 <p>
                     The original Daily Game #131 used the same first 4 words from Quordle. Both apps are both based on the same original code, and there was a seemingly unlikely 
                     randomization fluke. A new #131 is now available, and the randomization has been changed slightly in the hopes this never happens again.
@@ -292,6 +292,9 @@ table {
                 <p>
                     ♥ - octordle
                 </p>
+                <div class="box" style="width: 60%; border:double;cursor:pointer; margin: 2rem auto;" id="closequordlegate">
+                    Close this message
+                </div>
             </div>
             <div class="box" style="width: 60%; border:double;cursor:pointer; margin-bottom: 25px; display:none;" id="tryv2">
                 <a href="https://octordle.com/v2/?ref=v1">Try the new version!</a>
@@ -1692,6 +1695,8 @@ acquire("widescreen-reset").onclick = function() {
     window.onresize();
 }
 
+
+
 function fullscreenHandler() {
     if (isInFullscreen()) {
         acquire("fullscreen").style.display = "none";
@@ -1700,6 +1705,18 @@ function fullscreenHandler() {
         acquire("fullscreen").style.display = "";
         acquire("exit_fullscreen").style.display = "none";
     }
+}
+
+acquire("closequordlegate").onclick = function() {
+    localStorage.setItem('closequordlegate', '1');
+    if (window.gtag) {
+        gtag("event", "quordlegate-close");
+    }
+    acquire('quordle-gate').style.display = "none"
+}
+
+if(!localStorage.getItem("closequordlegate")) {
+    acquire('quordle-gate').style.display = "block";
 }
 
 if (document.addEventListener) {
